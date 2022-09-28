@@ -1,0 +1,44 @@
+﻿@model FinalFour.Models.Pick
+
+@{
+    ViewData["Title"] = "Picks";
+}
+
+<h1>Picks</h1>
+<h4>Agrega tu apuesta: </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Picks">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Apuesta" class="control-label"></label>
+                <input asp-for="Apuesta" class="form-control" />
+                <span asp-validation-for="Apuesta" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Momio" class="control-label"></label>
+                <input asp-for="Momio" class="form-control" type="number" />
+                <span asp-validation-for="Momio" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" type="number" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Apuesta" class="control-label"></label>
+                <select asp-for="Apuesta" class"="form-select" aria-label="Default select example">
+                  <option value="1">Ganada</option>
+                  <option value="2">Perdida</option>
+                  <option value="3">Nula</option>
+                </select>
+                 <span asp-validation-for="Apuesta" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Crear apuesta" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
