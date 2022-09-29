@@ -2,6 +2,9 @@
 using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
 
 namespace FinalFour.Controllers
 {
@@ -9,14 +12,15 @@ namespace FinalFour.Controllers
     {
         FirebaseAuthProvider auth;
         private readonly ILogger<HomeController> _logger;
+      
 
-        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyBmd2FLyMNrEKcaupI5bEH2TTShUQ7JfKY"));
-
+            auth = new FirebaseAuthProvider(new Firebase.Auth.FirebaseConfig("AIzaSyBmd2FLyMNrEKcaupI5bEH2TTShUQ7JfKY"));
+            
         }
+
 
         public IActionResult Index()
         {
@@ -31,34 +35,6 @@ namespace FinalFour.Controllers
                 return RedirectToAction("SignIn");
             }
           
-        }
-
-        public IActionResult Picks()
-        {
-            var token = HttpContext.Session.GetString("_UserToken");
-
-            if (token != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("SignIn");
-            }
-        }
-
-        public IActionResult Administrador()
-        {
-            var token = HttpContext.Session.GetString("_UserToken");
-
-            if (token != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("SignIn");
-            }
         }
         public IActionResult Registro()
         {

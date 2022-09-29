@@ -1,15 +1,18 @@
 ﻿@model FinalFour.Models.Pick
 
 @{
-    ViewData["Title"] = "Picks";
+    ViewData["Title"] = "Create";
 }
+
+<h1>Create</h1>
+
 
 <h1>Picks</h1>
 <h4>Agrega tu apuesta: </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Picks">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
                 <label asp-for="Apuesta" class="control-label"></label>
@@ -27,18 +30,22 @@
                 <span asp-validation-for="Monto" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Apuesta" class="control-label"></label>
-                <select asp-for="Apuesta" class"="form-select" aria-label="Default select example">
+                <label asp-for="Resultado" class="control-label"></label>
+                <select asp-for="Resultado" class"="form-select" aria-label="Default select example">
+                   <option selected>Estado</option>
                   <option value="1">Ganada</option>
                   <option value="2">Perdida</option>
                   <option value="3">Nula</option>
                 </select>
-                 <span asp-validation-for="Apuesta" class="text-danger"></span>
+                 <span asp-validation-for="Resultado" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input type="submit" value="Crear apuesta" class="btn btn-primary" />
+                <input type="submit" value="Crear apuesta" class="btn btn-primary" asp-action="Create" />
             </div>
         </form>
     </div>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

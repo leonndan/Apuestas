@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FinalFour.Models.Pick>
+
+@{
+    ViewData["Title"] = "Administrador";
+}
+<h2>Administrador</h2>
+<p>Control de apuestas ganadas/perdidas</p>
+
+<table class="table">
+    <tr>
+         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apuesta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Momio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resultado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apuesta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Momio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resultado)
+        </td>
+    </tr>
+    }
+</table>

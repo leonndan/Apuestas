@@ -3,14 +3,10 @@ namespace FinalFour.Models
 {
     public class Pick
     {
-        [Required]
-        public string Apuesta { get; set; }
-        [Required]
-        public int Momio { get; set; }
-        [Required] 
-        public int Monto { get; set; }
-
-        [Required]
-        public bool Resultado { get; set; }
+        public string?Id { get; set; }
+        public string?Apuesta { get; set; }
+        public int?Momio { get; set; }
+        public int?Monto { get; set; }
+        public int?Resultado { get; set; }
     }
 }
