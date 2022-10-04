@@ -5,11 +5,15 @@ using FinalFour.Models;
 using FireSharp.Response;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using FinalFour.Controllers;
+
 
 namespace FinalFour.Controllers
 {
     public class ApuestaController : Controller
     {
+
+        
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "qwSpFATqsxDFSIY39QSqvmCIMdf2VyktLmI7rVH2",
@@ -23,17 +27,30 @@ namespace FinalFour.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var token = HttpContext.Session.GetString("_UserToken");
+
+            if (token != null)
+            {
+                return View();
+            }
+            else
+            {
+                
+                return View(null);
+            }
         }
         [HttpPost]
         public IActionResult Create(Pick pick)
         {
+            var token = HttpContext.Session.GetString("_UserToken");
+
             try
             {
                 client = new FireSharp.FirebaseClient(config);
                 var data = pick;
                 PushResponse response = client.Push("Apuesta/", data);
                 data.Id = response.Result.name;
+                data.UID = auth
                 SetResponse setResponse = client.Set("Apuesta/" + data.Id,data);
 
                 if (setResponse.StatusCode == System.Net.HttpStatusCode.OK)
@@ -53,20 +70,37 @@ namespace FinalFour.Controllers
 
             return View();
         }
-        public IActionResult Consuta()
-        {
-            client = new FireSharp.FirebaseClient(config);
-            FirebaseResponse response = client.Get("Apuesta");
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-            var list = new List<Pick>();
-            if (data != null)
+        public IActionResult Consulta() {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
             {
-                foreach (var item in data)
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = client.Get("Apuesta");
+                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+                var list = new List<Pick>();
+                if (data != null)
                 {
-                    list.Add(JsonConvert.DeserializeObject<Pick>(((JProperty)item).Value.ToString()));
+
+                    foreach (var item in data)
+                    {
+                        list.Add(JsonConvert.DeserializeObject<Pick>(((JProperty)item).Value.ToString()));
+                    }
+
                 }
+                return View(list);
             }
-            return View(list);
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
+            
+            
         }
+        
+       
+
+
+
+
     }
 }

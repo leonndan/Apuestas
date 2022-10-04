@@ -84,6 +84,7 @@ namespace FinalFour.Controllers
                 if (token != null)
                 {
                     HttpContext.Session.SetString("_UserToken", token);
+                    
 
                     return RedirectToAction("Index");
                 }

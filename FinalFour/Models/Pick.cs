@@ -3,6 +3,7 @@ namespace FinalFour.Models
 {
     public class Pick
     {
+        public string? UID { get; set; }  
         public string?Id { get; set; }
         public string?Apuesta { get; set; }
         public int?Momio { get; set; }
