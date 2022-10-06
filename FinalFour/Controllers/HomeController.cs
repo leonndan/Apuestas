@@ -11,6 +11,8 @@ namespace FinalFour.Controllers
     public class HomeController : Controller
     {
         FirebaseAuthProvider auth;
+        
+
         private readonly ILogger<HomeController> _logger;
       
 
@@ -51,8 +53,9 @@ namespace FinalFour.Controllers
                     var fbAuthLink = await auth
                                     .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
                     string token = fbAuthLink.FirebaseToken;
-                    //saving the token in a session variable
-                    if (token != null)
+
+                //saving the token in a session variable
+                if (token != null)
                     {
                         HttpContext.Session.SetString("_UserToken", token);
 
@@ -67,6 +70,7 @@ namespace FinalFour.Controllers
                 }
                 return View();
         }
+
         public IActionResult SignIn()
         {
             return View();

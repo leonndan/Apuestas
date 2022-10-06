@@ -9,6 +9,8 @@ namespace FinalFour.Models
         [Required]
         public string Password { get; set; }
 
+        public string UserId { get; set; }
+
 
     }
 }

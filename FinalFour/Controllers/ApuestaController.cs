@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using FinalFour.Controllers;
 
 
+
 namespace FinalFour.Controllers
 {
     public class ApuestaController : Controller
@@ -50,7 +51,6 @@ namespace FinalFour.Controllers
                 var data = pick;
                 PushResponse response = client.Push("Apuesta/", data);
                 data.Id = response.Result.name;
-                data.UID = auth
                 SetResponse setResponse = client.Set("Apuesta/" + data.Id,data);
 
                 if (setResponse.StatusCode == System.Net.HttpStatusCode.OK)

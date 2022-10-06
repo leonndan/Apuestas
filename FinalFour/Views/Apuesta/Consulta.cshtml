@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<FinalFour.Models.Pick>
 @{
     ViewData["Title"] = "Consulta";
+    int a=0;
+    int b = 0;
+    string color="table-primary";
+    float? apostado = 0;
+    float? perdida = 0;
+    float? suma = 0;
+    float? utilidad = 0;
+
 }
 <h2>Administrador</h2>
 <p>Control de apuestas ganadas/perdidas</p>
@@ -19,16 +27,38 @@
         <th>
             @Html.DisplayNameFor(model => model.Monto)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resultado)
-        </th>
+        
         <th></th>
     </tr>
 
     @foreach (var item in Model) {
-    <tr>
+        @if (item.Resultado == 1)
+        {
+            a++;
+            @if (item.Momio > 0)
+            {
+                suma = item.Monto * item.Momio / 100;
+                
+            }
+            else
+            {
+                suma = ((100)/(item.Momio)*(-1))* item.Monto;
+            }
+
+            utilidad+= suma;
+            color = "table-success";
+
+            }
+            @if(item.Resultado==2)
+            {
+                b++;
+            perdida += item.Monto;
+            color = "table-danger";
+        }
+        <tr class=@color>
         <td>
             @Html.DisplayFor(modelItem => item.Id)
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Apuesta)
@@ -39,10 +69,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.Monto)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Resultado)
-        </td>
-    </tr>
+        
+        </tr>
+        apostado+= item.Monto;
     }
-       
+</table>
+<table class="table">
+    <tr>
+        <th>GANADORA</th>
+        <th>NO GANADORA</th>
+        <th>APOSTADO</th>
+        <th>UTILIDAD</th>
+        <th>PERDIDAS</th>
+    </tr>
+
+    <tr>
+        <td>@a</td>
+        <td>@b</td>
+        <td>@apostado</td>
+        <td>@utilidad</td>
+        <td>@perdida</td>
+    </tr>
 </table>
