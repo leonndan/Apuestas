@@ -11,6 +11,7 @@ namespace FinalFour.Controllers
     public class HomeController : Controller
     {
         FirebaseAuthProvider auth;
+        int UID = 1;
         
 
         private readonly ILogger<HomeController> _logger;

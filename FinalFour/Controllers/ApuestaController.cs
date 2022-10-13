@@ -37,7 +37,7 @@ namespace FinalFour.Controllers
             else
             {
                 
-                return View(null);
+                return RedirectToAction("SignIn","Home");
             }
         }
         [HttpPost]
@@ -91,16 +91,10 @@ namespace FinalFour.Controllers
             }
             else
             {
-                return RedirectToAction("SignIn");
+                return RedirectToAction("SignIn","Home");
             }
             
-            
+   
         }
-        
-       
-
-
-
-
     }
 }
