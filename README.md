@@ -1,4 +1,4 @@
-# PicksControllerv1
+# PicksController
 
 Gestor de Apuestas Online
 
